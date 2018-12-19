@@ -1,0 +1,14 @@
+{
+"machineName":   "rokeyTestMachine001",
+"videoCardName": "Ariel",
+"cpuName":       "RYZEN APU @ 3.2GHZ",
+"systemName":    "Win10 64 bit",
+"memoryName":    "32 GB",
+"chipsetName":   "B85-PRO GAMER",
+"mainLineName":  "18.30.00.01",
+"baseDriverDate":"1700692",
+"sClockName":    "1150",
+"mClockName":    "1000",
+"gpuMemName":    "Share system memory",
+"compilerName":  "LLPC"
+}

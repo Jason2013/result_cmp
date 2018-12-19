@@ -1,0 +1,3 @@
+[16:40:49.735] INFO: ShaderBench version 18.12.1720923 Release starts on Mon Dec 17 16:40:49 2018.
+[16:40:49.735] INFO: Command line: "D:\Rocky\shaderbench\18.12\Windows\shaderbench.exe".
+[16:40:49.735] INFO: System information(OS/CPU/GPU/RAM) are not available due to environment variable "DisableSystemInfoLogging" being set as 1.
