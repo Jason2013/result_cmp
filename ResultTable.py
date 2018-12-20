@@ -19,7 +19,7 @@ class TestResult(object):
         state = RowState.Misc
         with open(self.testResultFile) as f:
             for row in f:
-                row = row.strip()
+                row = row.rstrip()
                 if state == RowState.Misc:
                     # if 
                     if row.startswith("["):
