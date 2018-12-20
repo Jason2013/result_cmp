@@ -22,6 +22,7 @@ class TestResult(object):
                 row = row.rstrip()
                 if state == RowState.Misc:
                     # if 
+                    print("Misc: " + row)
                     if row.startswith("["):
                         pass
                     elif not row:
@@ -30,12 +31,13 @@ class TestResult(object):
                         assert False
                 elif state == RowState.ResultHeader:
                     assert row
-                    print("Header: " + row)
+                    print("Head: " + row)
                     state = RowState.ResultData
                 elif state == RowState.ResultData:
                     if row:
                         print("Data: " + row)
                     else:
+                        print("Misc: " + row)
                         state = RowState.ResultHeader
                 else:
                     assert False
