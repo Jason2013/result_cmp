@@ -18,8 +18,7 @@ class TestResult(object):
     def LoadData(self):
         state = RowState.Misc
         with open(self.testResultFile) as f:
-            for row in f:
-                row = row.rstrip()
+            for row in (x.rstrip() for x in f):
                 if state == RowState.Misc:
                     # if 
                     print("Misc: " + row)
