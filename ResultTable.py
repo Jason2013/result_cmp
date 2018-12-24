@@ -1,6 +1,8 @@
 # coding=utf-8
 
 from enum import Enum
+import sys
+
 class RowState(Enum):
     Misc = 1
     ResultHeader = 2
@@ -65,6 +67,22 @@ class TestResultTable(object):
                     if row[i] != "N/A":
                         self.headers[i].dataType = ColumnDataType.Text
         self.data.append(row)
+
+    def Compatible(self, tab):
+        if len(self.headers) != len(tab.headers):
+            print("The header count is not equal!", file=sys.stderr)
+            return False
+        # for (lhs, rhs) in zip(
+        err = next(((lhs, rhs) for (lhs, rhs) in zip(self.headers, tab.headers) if lhs != rhs), None)
+        if err:
+            print("The header %s is not equal to header %s!" % (lhs, rhs), file=sys.stderr)
+            return False
+
+        if len(self.data) != len(tab.data):
+            print("The row count %d is not equal to row count %d!" % (len(self.data), len(tab.data)), file=sys.stderr)
+            return False
+
+        return True
 
 
 class TestResult(object):
