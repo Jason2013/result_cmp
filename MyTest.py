@@ -28,7 +28,7 @@ class TestResultTable(unittest.TestCase):
         pass
 
     def test_compatible(self):
-        TEST_RESULTS_FILE = r"D:\work\dev\teamcity\data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
         r1 = ResultTable.TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
         r2 = ResultTable.TestResult(TEST_RESULTS_FILE)
