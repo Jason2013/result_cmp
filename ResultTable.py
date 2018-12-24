@@ -42,7 +42,7 @@ class TestResultTable(object):
                     val = float(row[i])
                     row[i] = val
                 except ValueError:
-                    if row[i] <> "N/A":
+                    if row[i] != "N/A":
                         self.headers[i].dataType = ColumnDataType.Text
         self.data.append(row)
 
