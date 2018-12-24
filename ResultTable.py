@@ -31,6 +31,9 @@ class ColumnHeader(object):
             and self.dataType == other.dataType \
             and self.maxDataWidth == self.maxDataWidth
 
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
 
 class TestResultTable(object):
 
