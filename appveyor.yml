@@ -48,13 +48,13 @@ skip_commits:
 # # glm:x64-windows                                    0.9.9.2          OpenGL Mathematics (GLM) https://glm.g-truc.net
 # # glm:x86-windows
 
-build:
-  parallel: true
+# build:
+#   parallel: true
 
-before_build:
-  - cmd: cmake --version
-  - cmd: git --version
-  - cmd: set
+# before_build:
+#   - cmd: cmake --version
+#   - cmd: git --version
+#   - cmd: set
   # - cmd: vcpkg list
 
 build_script:
