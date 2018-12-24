@@ -97,6 +97,11 @@ class TestResult(object):
             self.tabs.append(tab)
 
 
+class AvgTestResult(object):
+
+    def __init__(self, results):
+        pass
+
 if __name__ == "__main__":
     r = TestResult(TEST_RESULTS_FILE)
     r.LoadData()
