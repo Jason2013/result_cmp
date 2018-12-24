@@ -25,6 +25,12 @@ class ColumnHeader(object):
     def __str__(self):
         return "(%s, %d, %s, %d)" % (self.caption, self.columnWidth, "Number" if self.dataType == ColumnDataType.Number else "Text", self.maxDataWidth)
 
+    def __eq__(self, other):
+        return self.caption == other.caption \
+            and self.columnWidth == other.columnWidth \
+            and self.dataType == other.dataType \
+            and self.maxDataWidth == self.maxDataWidth
+
 
 class TestResultTable(object):
 
