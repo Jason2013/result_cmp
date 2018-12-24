@@ -22,6 +22,9 @@ class ColumnHeader(object):
         self.dataType = dataType
         self.maxDataWidth = maxDataWidth
 
+    def __str__(self):
+        return "(%s, %d, %s, %d)" % (self.caption, self.columnWidth, "Number" if self.dataType == ColumnDataType.Number else "Text", self.maxDataWidth)
+
 
 class TestResultTable(object):
 
@@ -29,10 +32,18 @@ class TestResultTable(object):
         self.headers = []
         self.data = []
 
-    def AddHeader(header):
+    def AddHeader(self, header):
         self.headers.append(header)
 
-    def AddDataRow(row):
+    def AddHeadersFromStr(self, s):
+        assert not self.headers
+        for (caption, colWidth, maxDataWidth) in ((x.strip(), len(x), len(x.strip())) for x in s.split(",")):
+            dataType = ColumnDataType.Text if caption in ("TestCaseId#", "API") else ColumnDataType.Number
+            header = ColumnHeader(caption, colWidth, dataType, maxDataWidth)
+            # self.headers.append(header)
+            self.AddHeader(header)
+
+    def AddDataRow(self, row):
         for (i, data) in enumerate(row):
             dataLen = len(data)
             if dataLen > self.headers[i].maxDataWidth:
@@ -51,6 +62,7 @@ class TestResult(object):
 
     def __init__(self, TestResultFile = None):
         self.testResultFile = TestResultFile if TestResultFile else None
+        self.tabs = []
 
     def LoadData(self):
         state = RowState.Misc
@@ -69,17 +81,27 @@ class TestResult(object):
                     assert row
                     print("Head: " + row)
                     tab = TestResultTable()
+                    tab.AddHeadersFromStr(row)
+
                     state = RowState.ResultData
                 elif state == RowState.ResultData:
                     if row:
                         print("Data: " + row)
+                        tab.AddDataRow([x.strip() for x in row.split(",")])
                     else:
+                        self.tabs.append(tab)
                         print("Misc: " + row)
                         state = RowState.ResultHeader
                 else:
                     assert False
+            self.tabs.append(tab)
 
 
 if __name__ == "__main__":
     r = TestResult(TEST_RESULTS_FILE)
     r.LoadData()
+    print(r.tabs[0])
+    for x in r.tabs[0].headers:
+        print(x)
+    for x in r.tabs[0].data:
+        print(x)
