@@ -99,6 +99,11 @@ class TestResultTable(unittest.TestCase):
         r = AvgVal(vals)
         self.assertTrue(r >= 0.1 - 1e-7 and r<= 0.1 + 1e-7)
 
+        vals = [20.56214, 20.56206, 20.56187, 20.56204, 20.56210]
+        r = AvgVal(vals)
+        # print(r)
+        self.assertTrue(r > 20.56206 and r< 20.56207)
+
 
     def test_avg_test_result_table(self):
         r = {}
