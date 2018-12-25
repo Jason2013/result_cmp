@@ -47,6 +47,9 @@ class TestResultTable(object):
     def AddHeader(self, header):
         self.headers.append(header)
 
+    def HeadLine(self):
+        return ','.join([header.rjust(header.columnWidth, " ") for header in self.headers])
+
     def AddHeadersFromStr(self, s):
         assert not self.headers
         for (caption, colWidth, maxDataWidth) in ((x.strip(), len(x), len(x.strip())) for x in s.split(",")):
@@ -56,6 +59,7 @@ class TestResultTable(object):
             self.AddHeader(header)
 
     def AddDataRow(self, row):
+        assert len(row) == len(self.headers)
         for (i, data) in enumerate(row):
             dataLen = len(data)
             if dataLen > self.headers[i].maxDataWidth:
@@ -67,6 +71,16 @@ class TestResultTable(object):
                 except ValueError:
                     self.headers[i].dataType = ColumnDataType.Text
         self.data.append(row)
+
+    def DataRowLine(self, row):
+        return ','.join([str(col).rjust(header.columnWidth, " ") for (header, col) in zip(self.headers, row)])
+
+    def TableLines(self):
+        lines = [self.HeadLine()]
+        for line in self.data:
+            lines.append(self.DataRowLine(line))
+
+        return '\n'.join(lines)
 
     def Compatible(self, tab):
         if len(self.headers) != len(tab.headers):
@@ -131,6 +145,9 @@ class TestResult(object):
                 return False
 
         return True
+
+    def ResultLines(self):
+        return '\n\n'.join([tab.TableLines() for tab in self.tabs])
 
 
 def AvgVal(vals):
