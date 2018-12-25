@@ -151,13 +151,32 @@ def AvgVal(vals):
 
 def AvgTestResultTable(tabs):
     assert len(tabs) == 5
-    for (i, j) in ((i, j) for i in range(1, 6) for j in range(1, 6) if i != j):
+    for (i, j) in ((i, j) for i in range(5) for j in range(5) if i != j):
         assert tabs[i].Compatible(tabs[j])
 
-    r = copy.deepcopy(tabs[0])
+    res = copy.deepcopy(tabs[0])
+    for (i, rows) in enumerate(zip(*[tab.data for tab in tabs])):
+        for (col, header) in enumerate(res.headers):
+            if header.dataType == ColumnDataType.Number:
+                vals = [row[col] for row in rows]
+                res.data[i][col] = AvgVal(vals)
 
-    def __init__(self, results):
-        pass
+    return res
+
+def AvgTestResult(results):
+
+    result_num = len(results)
+    for (i, j) in ((i, j) for i in range(result_num) for j in range(result_num)):
+        assert results[i].Compatible(results[j])
+
+    res = TestResult()
+    for tabs in zip(*[result.tabs for result in results]):
+        res.tabs.append(AvgTestResultTable(tabs))
+
+    assert res.Compatible(results[0])
+
+    return res
+
 
 if __name__ == "__main__":
     r = TestResult(TEST_RESULTS_FILE)
