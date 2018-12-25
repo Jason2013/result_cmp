@@ -96,7 +96,7 @@ class TestResult(object):
         with open(self.testResultFile) as f:
             for row in (x.rstrip() for x in f):
                 if state == RowState.Misc:
-                    print("Misc: " + row)
+                    # print("Misc: " + row)
                     if row.startswith("["):
                         pass
                     elif not row:
@@ -105,18 +105,18 @@ class TestResult(object):
                         assert False
                 elif state == RowState.ResultHeader:
                     assert row
-                    print("Head: " + row)
+                    # print("Head: " + row)
                     tab = TestResultTable()
                     tab.AddHeadersFromStr(row)
 
                     state = RowState.ResultData
                 elif state == RowState.ResultData:
                     if row:
-                        print("Data: " + row)
+                        # print("Data: " + row)
                         tab.AddDataRow([x.strip() for x in row.split(",")])
                     else:
                         self.tabs.append(tab)
-                        print("Misc: " + row)
+                        # print("Misc: " + row)
                         state = RowState.ResultHeader
                 else:
                     assert False
