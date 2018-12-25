@@ -111,7 +111,16 @@ class TestResultTable(unittest.TestCase):
 
         res = AvgTestResultTable(tabs)
 
-        print(res.TableLines())
+        # print(res.TableLines())
+        s = res.TableLines()
+
+        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "wb") as f:
+            pickle.dump(s, f)
+
+        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
+            s1 = pickle.load(f)
+
+        self.assertEqual(s, s1)
 
         # with open("TestResult_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
         #     r3 = pickle.load(f)
@@ -119,6 +128,40 @@ class TestResultTable(unittest.TestCase):
 
         # for (a, b) in ((i, j) for j in range(1,6) for i in range(1,6) if i != j):
         #     self.assertTrue(r[a].Compatible(r[b]))
+
+
+    def test_avg_test_result_table_str(self):
+
+        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        res = TestResult(TEST_RESULTS_FILE)
+        res.LoadData()
+
+        s = res.tabs[0].TableLines()
+
+        # with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "wb") as f:
+        #     pickle.dump(s, f)
+
+        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
+            s1 = pickle.load(f)
+
+        self.assertEqual(s, s1)
+
+
+    def test_avg_test_result_str(self):
+
+        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        res = TestResult(TEST_RESULTS_FILE)
+        res.LoadData()
+
+        s = res.ResultLines()
+
+        # with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "wb") as f:
+        #     pickle.dump(s, f)
+
+        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
+            s1 = pickle.load(f)
+
+        self.assertEqual(s, s1)
 
 
 if __name__ == "__main__":
