@@ -59,13 +59,12 @@ class TestResultTable(object):
             dataLen = len(data)
             if dataLen > self.headers[i].maxDataWidth:
                 self.headers[i].maxDataWidth = dataLen
-            if self.headers[i].dataType == ColumnDataType.Number:
+            if self.headers[i].dataType == ColumnDataType.Number and row[i] != "N/A":
                 try:
                     val = float(row[i])
                     row[i] = val
                 except ValueError:
-                    if row[i] != "N/A":
-                        self.headers[i].dataType = ColumnDataType.Text
+                    self.headers[i].dataType = ColumnDataType.Text
         self.data.append(row)
 
     def Compatible(self, tab):
