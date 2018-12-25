@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from enum import Enum
+import copy
 import sys
 
 class RowState(Enum):
@@ -123,7 +124,30 @@ class TestResult(object):
             self.tabs.append(tab)
 
 
-class AvgTestResult(object):
+    def Compatible(self, other):
+
+        for (lhs, rhs) in zip(self.tabs, other.tabs):
+            if not lhs.Compatible(rhs):
+                return False
+
+        return True
+
+
+
+def AvgVal(vals):
+
+    assert len(vals) == 5
+
+    for val in vals:
+        if val == "N/A":
+            return "N/A"
+    vals.sort()
+def AvgTestResultTable(tabs):
+    assert len(tabs) == 5
+    for (i, j) in ((i, j) for i in range(1, 6) for j in range(1, 6) if i != j):
+        assert tabs[i].Compatible(tabs[j])
+
+    r = copy.deepcopy(tabs[0])
 
     def __init__(self, results):
         pass
