@@ -84,5 +84,21 @@ class TestResultTable(unittest.TestCase):
         for (a, b) in ((i, j) for j in range(1,6) for i in range(1,6) if i != j):
             self.assertTrue(r[a].Compatible(r[b]))
 
+
+    def test_avg_val(self):
+
+        vals = [0.1, 0.1, 0.1, 2, 3]
+        r = AvgVal(vals)
+        self.assertTrue(r >= 0.1 - 1e-7 and r<= 0.1 + 1e-7)
+
+        vals = [0.1, 0.1, 0.1, -2, 3]
+        r = AvgVal(vals)
+        self.assertTrue(r >= 0.1 - 1e-7 and r<= 0.1 + 1e-7)
+
+        vals = [0.1, 0.1, 0.1, -2, -3]
+        r = AvgVal(vals)
+        self.assertTrue(r >= 0.1 - 1e-7 and r<= 0.1 + 1e-7)
+
+
 if __name__ == "__main__":
     unittest.main()

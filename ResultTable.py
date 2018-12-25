@@ -133,7 +133,6 @@ class TestResult(object):
         return True
 
 
-
 def AvgVal(vals):
 
     assert len(vals) == 5
@@ -142,6 +141,14 @@ def AvgVal(vals):
         if val == "N/A":
             return "N/A"
     vals.sort()
+
+    vmap = {}
+    for i in range(0, 3):
+        vmap[vals[i+2]-vals[i]] = [vals[i], vals[i+1], vals[i+2]]
+
+    return sum(vmap[min(vmap)])/3.0
+
+
 def AvgTestResultTable(tabs):
     assert len(tabs) == 5
     for (i, j) in ((i, j) for i in range(1, 6) for j in range(1, 6) if i != j):
