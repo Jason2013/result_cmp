@@ -100,5 +100,24 @@ class TestResultTable(unittest.TestCase):
         self.assertTrue(r >= 0.1 - 1e-7 and r<= 0.1 + 1e-7)
 
 
+    def test_avg_test_result_table(self):
+        r = {}
+        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        for i in range(1, 6):
+            r[i] = TestResult(TEST_RESULTS_FILE.format(i))
+            r[i].LoadData()
+
+        tabs = [tab.tabs[0] for tab in r.values()]
+
+        res = AvgTestResultTable(tabs)
+
+        # with open("TestResult_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
+        #     r3 = pickle.load(f)
+        #     self.assertTrue(r[1].Compatible(r3))
+
+        # for (a, b) in ((i, j) for j in range(1,6) for i in range(1,6) if i != j):
+        #     self.assertTrue(r[a].Compatible(r[b]))
+
+
 if __name__ == "__main__":
     unittest.main()
