@@ -63,4 +63,4 @@ build_script:
 #   - cmd: build.bat
 
 test_script:
-    - cmd: C:\Python36-x64\python.exe MyTest.py
+    - cmd: C:\Python36-x64\python.exe MyTest.py -v
