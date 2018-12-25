@@ -48,7 +48,7 @@ class TestResultTable(object):
         self.headers.append(header)
 
     def HeadLine(self):
-        return ','.join([header.rjust(header.columnWidth, " ") for header in self.headers])
+        return ','.join([header.caption.rjust(header.columnWidth, " ") for header in self.headers])
 
     def AddHeadersFromStr(self, s):
         assert not self.headers
@@ -73,7 +73,16 @@ class TestResultTable(object):
         self.data.append(row)
 
     def DataRowLine(self, row):
-        return ','.join([str(col).rjust(header.columnWidth, " ") for (header, col) in zip(self.headers, row)])
+
+        def ValueStr(val, dataType):
+
+            if dataType == ColumnDataType.Text or val == "N/A":
+                return val
+
+            return "{:.5f}".format(val)
+
+
+        return ','.join([ValueStr(col, header.dataType).rjust(header.columnWidth, " ") for (header, col) in zip(self.headers, row)])
 
     def TableLines(self):
         lines = [self.HeadLine()]

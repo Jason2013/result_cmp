@@ -104,12 +104,14 @@ class TestResultTable(unittest.TestCase):
         r = {}
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
         for i in range(1, 6):
-            r[i] = TestResult(TEST_RESULTS_FILE.format(i))
+            r[i] = TestResult(TEST_RESULTS_FILE.format(1))
             r[i].LoadData()
 
         tabs = [tab.tabs[0] for tab in r.values()]
 
         res = AvgTestResultTable(tabs)
+
+        print(res.TableLines())
 
         # with open("TestResult_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
         #     r3 = pickle.load(f)
