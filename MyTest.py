@@ -104,7 +104,7 @@ class TestResultTable(unittest.TestCase):
         r = {}
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
         for i in range(1, 6):
-            r[i] = TestResult(TEST_RESULTS_FILE.format(1))
+            r[i] = TestResult(TEST_RESULTS_FILE.format(i))
             r[i].LoadData()
 
         tabs = [tab.tabs[0] for tab in r.values()]
@@ -114,10 +114,10 @@ class TestResultTable(unittest.TestCase):
         # print(res.TableLines())
         s = res.TableLines()
 
-        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "wb") as f:
-            pickle.dump(s, f)
+        # with open("TestResultTable_data_shaderbench_Ariel_llpc_1-5_001_test_results.txt", "wb") as f:
+        #     pickle.dump(s, f)
 
-        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
+        with open("TestResultTable_data_shaderbench_Ariel_llpc_1-5_001_test_results.txt", "rb") as f:
             s1 = pickle.load(f)
 
         self.assertEqual(s, s1)
