@@ -4,7 +4,6 @@ import copy
 import unittest
 import pickle
 
-# import TestResults
 from TestResults import *
 
 class TestColumnHeader(unittest.TestCase):
@@ -79,7 +78,7 @@ class TestUtils(unittest.TestCase):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
         rs = []
         for i in range(1, 3):
-            r = TestResult.TestResult(TEST_RESULTS_FILE.format(i))
+            r = TestResult(TEST_RESULTS_FILE.format(i))
             r.LoadData()
             rs.append(r)
         pass
@@ -100,7 +99,7 @@ class TestUtils(unittest.TestCase):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
         rs = []
         for i in range(1, 3):
-            r = TestResult.TestResult(TEST_RESULTS_FILE.format(i))
+            r = TestResult(TEST_RESULTS_FILE.format(i))
             r.LoadData()
             rs.append(r)
         pass
@@ -127,7 +126,7 @@ class TestResultTable(unittest.TestCase):
 
     def test_compatible(self):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
-        r1 = TestResult.TestResult(TEST_RESULTS_FILE)
+        r1 = TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
         # r2 = TestResult.TestResult(TEST_RESULTS_FILE)
         # r2.LoadData()
@@ -138,7 +137,7 @@ class TestResultTable(unittest.TestCase):
 
     def test_copy(self):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
-        r1 = TestResult.TestResult(TEST_RESULTS_FILE)
+        r1 = TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
 
         r2 = copy.deepcopy(r1)
