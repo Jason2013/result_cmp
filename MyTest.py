@@ -46,7 +46,7 @@ class TestUtils(unittest.TestCase):
 
     def test_avg_test_result_table(self):
         r = {}
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/{}/001/test_results.txt"
         for i in range(1, 6):
             r[i] = TestResult(TEST_RESULTS_FILE.format(i))
             r[i].LoadData()
@@ -75,7 +75,7 @@ class TestUtils(unittest.TestCase):
 
 
     def test_cmp_test_result_table(self):
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/{}/001/test_results.txt"
         rs = []
         for i in range(1, 3):
             r = TestResult(TEST_RESULTS_FILE.format(i))
@@ -96,7 +96,7 @@ class TestUtils(unittest.TestCase):
 
 
     def test_cmp_test_result(self):
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/{}/001/test_results.txt"
         rs = []
         for i in range(1, 3):
             r = TestResult(TEST_RESULTS_FILE.format(i))
@@ -125,7 +125,7 @@ class TestResultTable(unittest.TestCase):
         pass
 
     def test_compatible(self):
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/1/001/test_results.txt"
         r1 = TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
         # r2 = TestResult.TestResult(TEST_RESULTS_FILE)
@@ -136,7 +136,7 @@ class TestResultTable(unittest.TestCase):
             self.assertTrue(r1.tabs[0].Compatible(r3.tabs[0]))
 
     def test_copy(self):
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/1/001/test_results.txt"
         r1 = TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
 
@@ -150,7 +150,7 @@ class TestResultTable(unittest.TestCase):
 
     def test_src_data_compatible(self):
         r = {}
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/{}/001/test_results.txt"
         for i in range(1, 6):
             r[i] = TestResult(TEST_RESULTS_FILE.format(i))
             r[i].LoadData()
@@ -165,7 +165,7 @@ class TestResultTable(unittest.TestCase):
 
     def test_src_result_compatible(self):
         r = {}
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/{}/001/test_results.txt"
         for i in range(1, 6):
             r[i] = TestResult(TEST_RESULTS_FILE.format(i))
             r[i].LoadData()
@@ -180,7 +180,7 @@ class TestResultTable(unittest.TestCase):
 
     def test_avg_test_result_table_str(self):
 
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/1/001/test_results.txt"
         res = TestResult(TEST_RESULTS_FILE)
         res.LoadData()
 
@@ -197,7 +197,7 @@ class TestResultTable(unittest.TestCase):
 
     def test_avg_test_result_str(self):
 
-        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
+        TEST_RESULTS_FILE = r"data/shaderbench/Ariel_llpc/1/001/test_results.txt"
         res = TestResult(TEST_RESULTS_FILE)
         res.LoadData()
 
