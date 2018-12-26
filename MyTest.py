@@ -76,7 +76,19 @@ class TestUtils(unittest.TestCase):
 
 
     def test_cmp_test_result_table(self):
+        TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
+        # r1, r2 = None, None
+        rs = []
+        # for (i, r) in enumerate([r1, r2], 1):
+        for i in range(1, 3):
+            r = ResultTable.TestResult(TEST_RESULTS_FILE.format(i))
+            r.LoadData()
+            rs.append(r)
         pass
+        res = CmpTestResultTable(rs[0].tabs[0], rs[1].tabs[0])
+        s = res.TableLines()
+        print(s)
+
 
 
     def test_cmp_test_result(self):

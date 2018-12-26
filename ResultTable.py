@@ -62,15 +62,27 @@ class TestResultTable(object):
     def AddDataRow(self, row):
         assert len(row) == len(self.headers)
         for (i, data) in enumerate(row):
-            dataLen = len(data)
-            if dataLen > self.headers[i].maxDataWidth:
-                self.headers[i].maxDataWidth = dataLen
-            if self.headers[i].dataType == ColumnDataType.Number and row[i] != "N/A":
+            # dataLen = len(data)
+            # if dataLen > self.headers[i].maxDataWidth:
+            #     self.headers[i].maxDataWidth = dataLen
+            if self.headers[i].dataType == ColumnDataType.Text:
+                dataLen = len(data)
+            elif self.headers[i].dataType == ColumnDataType.Number and row[i] != "N/A":
                 try:
                     val = float(row[i])
                     row[i] = val
+                    dataLen = len(self.headers[i].formatStr.format(val))
                 except ValueError:
                     self.headers[i].dataType = ColumnDataType.Text
+                    dataLen = len(data)
+
+            if dataLen > self.headers[i].maxDataWidth:
+                self.headers[i].maxDataWidth = dataLen
+
+            # if self.headers[i].maxDataWidth + 1 > self.headers[i].columnWidth:
+            #     self.headers[i].columnWidth = self.headers[i].maxDataWidth + 1
+
+
         self.data.append(row)
 
     def DataRowLine(self, row):
@@ -224,7 +236,8 @@ def CmpTestResultTable(lhs, rhs):
                     hdr.columnWidth = length
                 if caption == "%":
                     hdr.formatStr = "{:.4%}"
-                res.AddHeader(header)
+                    hdr.columnWidth = 2
+                res.AddHeader(hdr)
         else:
             assert False
 
@@ -234,14 +247,14 @@ def CmpTestResultTable(lhs, rhs):
             if header.dataType == ColumnDataType.Text:
                 res_row.append(lhs_row[i])
             elif header.dataType == ColumnDataType.Number: 
-                res_row.append(lhs_row[i])
-                res_row.append("N/A" if "N/A" in (lhs_row[i], rhs_row[i]) else (rhs_row[i] - lhs_row[i])/lhs_row[i])
-                res_row.append(rhs_row[i])
+                res_row.append(str(lhs_row[i]))
+                res_row.append("N/A" if "N/A" in (lhs_row[i], rhs_row[i]) else str((rhs_row[i] - lhs_row[i])/lhs_row[i]))
+                res_row.append(str(rhs_row[i]))
                 pass
             else:
                 assert False
 
-        res.data.append(res_row)
+        res.AddDataRow(res_row)
 
     return res
 
