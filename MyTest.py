@@ -106,7 +106,15 @@ class TestUtils(unittest.TestCase):
         pass
         res = CmpTestResult(rs[0], rs[1])
         s = res.ResultLines()
-        print(s)
+        # print(s)
+
+        # with open("CmpTestResult_data_shaderbench_Ariel_llpc_1-2_001_test_results.txt", "wb") as f:
+        #     pickle.dump(s, f)
+
+        with open("CmpTestResult_data_shaderbench_Ariel_llpc_1-2_001_test_results.txt", "rb") as f:
+            s1 = pickle.load(f)
+
+        self.assertEqual(s, s1)
 
 
 class TestResultTable(unittest.TestCase):
