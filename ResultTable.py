@@ -62,17 +62,13 @@ class TestResultTable(object):
     def AddDataRow(self, row):
         assert len(row) == len(self.headers)
         for (i, (data, header)) in enumerate(zip(row, self.headers)):
-            # dataLen = len(data)
-            # if dataLen > self.headers[i].maxDataWidth:
-            #     self.headers[i].maxDataWidth = dataLen
-            # dataLen = 0
+
             if header.dataType == ColumnDataType.Text:
                 dataLen = len(data)
             elif header.dataType == ColumnDataType.Number:
                 if data == "N/A":
                     dataLen = len(data)
                 else:
-                    # dataLen = 0
                     try:
                         val = float(row[i])
                         row[i] = val
@@ -84,20 +80,11 @@ class TestResultTable(object):
 
             if dataLen > header.maxDataWidth:
                 header.maxDataWidth = dataLen
-                # print(header.columnWidth, header.maxDataWidth)
-                # print(header.caption, data, dataLen)
                 if header.maxDataWidth + 1> header.columnWidth:
                     header.columnWidth = header.maxDataWidth + 1
-                    pass
-
-            if header.maxDataWidth > header.columnWidth:
-                pass
-                print(header.columnWidth, header.maxDataWidth)
-                print(header.caption, data, dataLen)
-                # header.columnWidth = header.maxDataWidth
-
 
         self.data.append(row)
+
 
     def DataRowLine(self, row):
 
