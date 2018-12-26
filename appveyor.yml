@@ -60,8 +60,10 @@ skip_commits:
 
 build_script:
   - cmd: C:\Python36-x64\python.exe --version
+  - sh: python3 --version
 #   - cmd: type build.bat
 #   - cmd: build.bat
 
 test_script:
     - cmd: C:\Python36-x64\python.exe MyTest.py -v
+    - sh: python3 MyTest.py -v
