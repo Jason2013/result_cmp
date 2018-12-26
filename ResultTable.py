@@ -4,17 +4,17 @@ from enum import Enum
 import copy
 import sys
 
+
 class RowState(Enum):
     Misc = 1
     ResultHeader = 2
     ResultData = 3
     ResultEnd = 4
 
+
 class ColumnDataType(Enum):
     Text = 1
     Number = 2
-
-TEST_RESULTS_FILE = r"D:\work\dev\teamcity\data\shaderbench\Ariel_llpc\1\001\test_results.txt"
 
 
 class ColumnHeader(object):
@@ -189,6 +189,7 @@ def AvgTestResultTable(tabs):
 
     return res
 
+
 def AvgTestResult(results):
 
     result_num = len(results)
@@ -205,10 +206,4 @@ def AvgTestResult(results):
 
 
 if __name__ == "__main__":
-    r = TestResult(TEST_RESULTS_FILE)
-    r.LoadData()
-    print(r.tabs[0])
-    for x in r.tabs[0].headers:
-        print(x)
-    for x in r.tabs[0].data:
-        print(x)
+    pass
