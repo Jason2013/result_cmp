@@ -66,9 +66,9 @@ class TestResultTable(object):
             # if dataLen > self.headers[i].maxDataWidth:
             #     self.headers[i].maxDataWidth = dataLen
             # dataLen = 0
-            if self.headers[i].dataType == ColumnDataType.Text:
+            if header.dataType == ColumnDataType.Text:
                 dataLen = len(data)
-            elif self.headers[i].dataType == ColumnDataType.Number:
+            elif header.dataType == ColumnDataType.Number:
                 if data == "N/A":
                     dataLen = len(data)
                 else:
@@ -76,25 +76,25 @@ class TestResultTable(object):
                     try:
                         val = float(row[i])
                         row[i] = val
-                        dataLen = len(self.headers[i].formatStr.format(val))
+                        dataLen = len(header.formatStr.format(val))
                         # print("dataLen=", dataLen)
                     except ValueError:
-                        self.headers[i].dataType = ColumnDataType.Text
+                        header.dataType = ColumnDataType.Text
                         dataLen = len(data)
 
-            if dataLen > self.headers[i].maxDataWidth:
-                self.headers[i].maxDataWidth = dataLen
-                # print(self.headers[i].columnWidth, self.headers[i].maxDataWidth)
-                # print(self.headers[i].caption, data, dataLen)
-                if self.headers[i].maxDataWidth + 1> self.headers[i].columnWidth:
-                    self.headers[i].columnWidth = self.headers[i].maxDataWidth + 1
+            if dataLen > header.maxDataWidth:
+                header.maxDataWidth = dataLen
+                # print(header.columnWidth, header.maxDataWidth)
+                # print(header.caption, data, dataLen)
+                if header.maxDataWidth + 1> header.columnWidth:
+                    header.columnWidth = header.maxDataWidth + 1
                     pass
 
-            if self.headers[i].maxDataWidth > self.headers[i].columnWidth:
+            if header.maxDataWidth > header.columnWidth:
                 pass
-                print(self.headers[i].columnWidth, self.headers[i].maxDataWidth)
-                print(self.headers[i].caption, data, dataLen)
-                # self.headers[i].columnWidth = self.headers[i].maxDataWidth
+                print(header.columnWidth, header.maxDataWidth)
+                print(header.caption, data, dataLen)
+                # header.columnWidth = header.maxDataWidth
 
 
         self.data.append(row)
