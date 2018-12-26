@@ -65,22 +65,36 @@ class TestResultTable(object):
             # dataLen = len(data)
             # if dataLen > self.headers[i].maxDataWidth:
             #     self.headers[i].maxDataWidth = dataLen
+            # dataLen = 0
             if self.headers[i].dataType == ColumnDataType.Text:
                 dataLen = len(data)
-            elif self.headers[i].dataType == ColumnDataType.Number and row[i] != "N/A":
-                try:
-                    val = float(row[i])
-                    row[i] = val
-                    dataLen = len(self.headers[i].formatStr.format(val))
-                except ValueError:
-                    self.headers[i].dataType = ColumnDataType.Text
+            elif self.headers[i].dataType == ColumnDataType.Number:
+                if data == "N/A":
                     dataLen = len(data)
+                else:
+                    # dataLen = 0
+                    try:
+                        val = float(row[i])
+                        row[i] = val
+                        dataLen = len(self.headers[i].formatStr.format(val))
+                        # print("dataLen=", dataLen)
+                    except ValueError:
+                        self.headers[i].dataType = ColumnDataType.Text
+                        dataLen = len(data)
 
             if dataLen > self.headers[i].maxDataWidth:
                 self.headers[i].maxDataWidth = dataLen
+                # print(self.headers[i].columnWidth, self.headers[i].maxDataWidth)
+                # print(self.headers[i].caption, data, dataLen)
+                if self.headers[i].maxDataWidth + 1> self.headers[i].columnWidth:
+                    self.headers[i].columnWidth = self.headers[i].maxDataWidth + 1
+                    pass
 
-            # if self.headers[i].maxDataWidth + 1 > self.headers[i].columnWidth:
-            #     self.headers[i].columnWidth = self.headers[i].maxDataWidth + 1
+            if self.headers[i].maxDataWidth > self.headers[i].columnWidth:
+                pass
+                print(self.headers[i].columnWidth, self.headers[i].maxDataWidth)
+                print(self.headers[i].caption, data, dataLen)
+                # self.headers[i].columnWidth = self.headers[i].maxDataWidth
 
 
         self.data.append(row)
@@ -237,6 +251,7 @@ def CmpTestResultTable(lhs, rhs):
                 if caption == "%":
                     hdr.formatStr = "{:.4%}"
                     hdr.columnWidth = 2
+                    hdr.maxDataWidth = 1
                 res.AddHeader(hdr)
         else:
             assert False
