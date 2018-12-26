@@ -61,7 +61,7 @@ class TestResultTable(object):
 
     def AddDataRow(self, row):
         assert len(row) == len(self.headers)
-        for (i, data) in enumerate(row):
+        for (i, (data, header)) in enumerate(zip(row, self.headers)):
             # dataLen = len(data)
             # if dataLen > self.headers[i].maxDataWidth:
             #     self.headers[i].maxDataWidth = dataLen
