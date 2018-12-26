@@ -19,11 +19,12 @@ class ColumnDataType(Enum):
 
 class ColumnHeader(object):
 
-    def __init__(self, caption, columnWidth = 1, dataType = ColumnDataType.Number, maxDataWidth = 1):
+    def __init__(self, caption, columnWidth = 1, dataType = ColumnDataType.Number, maxDataWidth = 1, formatStr = "{:.5f}"):
         self.caption = caption
         self.columnWidth = columnWidth
         self.dataType = dataType
         self.maxDataWidth = maxDataWidth
+        self.formatStr = formatStr
 
     def __str__(self):
         return "(%s, %d, %s, %d)" % (self.caption, self.columnWidth, "Number" if self.dataType == ColumnDataType.Number else "Text", self.maxDataWidth)
@@ -74,15 +75,15 @@ class TestResultTable(object):
 
     def DataRowLine(self, row):
 
-        def ValueStr(val, dataType):
+        def ValueStr(val, header):
 
-            if dataType == ColumnDataType.Text or val == "N/A":
+            if header.dataType == ColumnDataType.Text or val == "N/A":
                 return val
 
-            return "{:.5f}".format(val)
+            return header.formatStr.format(val)
 
 
-        return ','.join([ValueStr(col, header.dataType).rjust(header.columnWidth, " ") for (header, col) in zip(self.headers, row)])
+        return ','.join([ValueStr(col, header).rjust(header.columnWidth, " ") for (header, col) in zip(self.headers, row)])
 
     def TableLines(self):
         lines = [self.HeadLine()]
@@ -221,6 +222,8 @@ def CmpTestResultTable(lhs, rhs):
                 length = len(hdr.caption) + 1
                 if length > hdr.columnWidth:
                     hdr.columnWidth = length
+                if caption == "%":
+                    hdr.formatStr = "{:.4%}"
                 res.AddHeader(header)
         else:
             assert False
