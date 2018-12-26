@@ -85,7 +85,7 @@ class TestUtils(unittest.TestCase):
         pass
         res = CmpTestResultTable(rs[0].tabs[0], rs[1].tabs[0])
         s = res.TableLines()
-        print(s)
+        # print(s)
 
         # with open("CmpTestResultTable_data_shaderbench_Ariel_llpc_1-2_001_test_results.txt", "wb") as f:
         #     pickle.dump(s, f)
