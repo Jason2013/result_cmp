@@ -4,8 +4,8 @@ import copy
 import unittest
 import pickle
 
-import ResultTable
-from ResultTable import *
+# import TestResults
+from TestResults import *
 
 class TestColumnHeader(unittest.TestCase):
 
@@ -16,10 +16,10 @@ class TestColumnHeader(unittest.TestCase):
         pass
 
     def test_init(self):
-        x = ResultTable.ColumnHeader("header")
+        x = ColumnHeader("header")
         self.assertEqual(x.caption, "header")
         self.assertEqual(x.columnWidth, 1)
-        self.assertEqual(x.dataType, ResultTable.ColumnDataType.Number)
+        self.assertEqual(x.dataType, ColumnDataType.Number)
         self.assertEqual(x.maxDataWidth, 1)
 
 
@@ -79,7 +79,7 @@ class TestUtils(unittest.TestCase):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
         rs = []
         for i in range(1, 3):
-            r = ResultTable.TestResult(TEST_RESULTS_FILE.format(i))
+            r = TestResult.TestResult(TEST_RESULTS_FILE.format(i))
             r.LoadData()
             rs.append(r)
         pass
@@ -100,7 +100,7 @@ class TestUtils(unittest.TestCase):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
         rs = []
         for i in range(1, 3):
-            r = ResultTable.TestResult(TEST_RESULTS_FILE.format(i))
+            r = TestResult.TestResult(TEST_RESULTS_FILE.format(i))
             r.LoadData()
             rs.append(r)
         pass
@@ -127,9 +127,9 @@ class TestResultTable(unittest.TestCase):
 
     def test_compatible(self):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
-        r1 = ResultTable.TestResult(TEST_RESULTS_FILE)
+        r1 = TestResult.TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
-        # r2 = ResultTable.TestResult(TEST_RESULTS_FILE)
+        # r2 = TestResult.TestResult(TEST_RESULTS_FILE)
         # r2.LoadData()
         # self.assertTrue(r1.tabs[0].Compatible(r2.tabs[0]))
         with open("TestResult_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
@@ -138,11 +138,11 @@ class TestResultTable(unittest.TestCase):
 
     def test_copy(self):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\1\001\test_results.txt"
-        r1 = ResultTable.TestResult(TEST_RESULTS_FILE)
+        r1 = TestResult.TestResult(TEST_RESULTS_FILE)
         r1.LoadData()
 
         r2 = copy.deepcopy(r1)
-        # r2 = ResultTable.TestResult(TEST_RESULTS_FILE)
+        # r2 = TestResult.TestResult(TEST_RESULTS_FILE)
         # r2.LoadData()
         # self.assertTrue(r1.tabs[0].Compatible(r2.tabs[0]))
         with open("TestResult_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
