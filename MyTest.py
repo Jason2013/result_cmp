@@ -87,6 +87,14 @@ class TestUtils(unittest.TestCase):
         s = res.TableLines()
         print(s)
 
+        # with open("CmpTestResultTable_data_shaderbench_Ariel_llpc_1-2_001_test_results.txt", "wb") as f:
+        #     pickle.dump(s, f)
+
+        with open("CmpTestResultTable_data_shaderbench_Ariel_llpc_1-2_001_test_results.txt", "rb") as f:
+            s1 = pickle.load(f)
+
+        self.assertEqual(s, s1)
+
 
     def test_cmp_test_result(self):
         TEST_RESULTS_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
