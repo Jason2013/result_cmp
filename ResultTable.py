@@ -206,7 +206,41 @@ def AvgTestResult(results):
 
 
 def CmpTestResultTable(lhs, rhs):
-    pass
+
+    assert lhs.Compatible(rhs)
+
+    res = TestResultTable()
+    for header in lhs.headers:
+        if header.dataType == ColumnDataType.Text:
+            res.AddHeader(header)
+        elif header.dataType == ColumnDataType.Number:
+            # for i in range(0, 3):
+            for caption in ("Before({})".format(header.caption), "%", "After({})".format(header.caption)):
+                hdr = copy.deepcopy(header)
+                hdr.caption = caption #"Before({})".format(header.caption)
+                length = len(hdr.caption) + 1
+                if length > hdr.columnWidth:
+                    hdr.columnWidth = length
+                res.AddHeader(header)
+        else:
+            assert False
+
+    for (lhs_row, rhs_row) in zip(lhs.data, rhs.data):
+        res_row = []
+        for (i, header) in enumerate(lhs.headers):
+            if header.dataType == ColumnDataType.Text:
+                res_row.append(lhs_row[i])
+            elif header.dataType == ColumnDataType.Number: 
+                res_row.append(lhs_row[i])
+                res_row.append("N/A" if "N/A" in (lhs_row[i], rhs_row[i]) else (rhs_row[i] - lhs_row[i])/lhs_row[i])
+                res_row.append(rhs_row[i])
+                pass
+            else:
+                assert False
+
+        res.data.append(res_row)
+
+    return res
 
 
 def CmpTestResult(lhs, rhs):
