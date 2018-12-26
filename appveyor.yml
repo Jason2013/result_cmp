@@ -59,9 +59,9 @@ skip_commits:
   # - cmd: vcpkg list
 
 build_script:
-  - cmd: C:\Python36-x64\python.exe --version
+  - cmd: python --version
 #   - cmd: type build.bat
 #   - cmd: build.bat
 
 test_script:
-    - cmd: C:\Python36-x64\python.exe MyTest.py -v
+    - cmd: python MyTest.py -v
