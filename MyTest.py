@@ -75,6 +75,14 @@ class TestUtils(unittest.TestCase):
         #     self.assertTrue(r[a].Compatible(r[b]))
 
 
+    def test_cmp_test_result_table(self):
+        pass
+
+
+    def test_cmp_test_result(self):
+        pass
+
+
 class TestResultTable(unittest.TestCase):
 
     def setUp(self):

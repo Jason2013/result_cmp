@@ -205,5 +205,13 @@ def AvgTestResult(results):
     return res
 
 
+def CmpTestResultTable(lhs, rhs):
+    pass
+
+
+def CmpTestResult(lhs, rhs):
+    pass
+
+
 if __name__ == "__main__":
     pass
