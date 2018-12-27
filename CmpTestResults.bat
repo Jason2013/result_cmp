@@ -1,0 +1,2 @@
+python CmpTestResults.py -a data\shaderbench\Ariel_llpc\1\001\test_results.txt data\shaderbench\Ariel_llpc\2\001\test_results.txt data\shaderbench\Ariel_llpc\3\001\test_results.txt data\shaderbench\Ariel_llpc\4\001\test_results.txt data\shaderbench\Ariel_llpc\5\001\test_results.txt data\shaderbench\Ariel_llpc\avg_test_results.txt
+python CmpTestResults.py -c data\shaderbench\Ariel_llpc\1\001\test_results.txt data\shaderbench\Ariel_llpc\avg_test_results.txt data\shaderbench\Ariel_llpc\cmp_test_results.txt

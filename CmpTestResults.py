@@ -1,21 +1,39 @@
 # coding=utf-8
 
+import sys
 from TestResults import TestResult, AvgTestResult, CmpTestResult
 
-TEST_RESULT_FILE = r"data\shaderbench\Ariel_llpc\{}\001\test_results.txt"
-AVG_TEST_RESULT_FILE = r"data\shaderbench\Ariel_llpc\avg_test_results.txt"
-CMP_TEST_RESULT_FILE = r"data\shaderbench\Ariel_llpc\cmp_test_results.txt"
+def RunAvgTestResult(files):
+    print(files)
+    rs = []
+    for i in range(0, 5):
+        testResult = TestResult(files[i])
+        testResult.LoadData()
+        rs.append(testResult)
 
-rs = []
-for i in range(1, 6):
-    testResult = TestResult(TEST_RESULT_FILE.format(i))
-    testResult.LoadData()
-    rs.append(testResult)
+    avgResult = AvgTestResult(rs)
+    with open(files[5], "w") as f:
+        f.write(avgResult.ResultLines())
 
-avgResult = AvgTestResult(rs)
-with open(AVG_TEST_RESULT_FILE, "w") as f:
-    f.write(avgResult.ResultLines())
+def RunCmpTestResult(files):
+    rs = []
+    for i in range(0, 2):
+        testResult = TestResult(files[i])
+        testResult.LoadData()
+        rs.append(testResult)
 
-cmpResult = CmpTestResult(rs[0], avgResult)
-with open(CMP_TEST_RESULT_FILE, "w") as f:
-    f.write(cmpResult.ResultLines())
+    cmpResult = CmpTestResult(rs[0], rs[1])
+    with open(files[2], "w") as f:
+        f.write(cmpResult.ResultLines())
+
+if __name__ == "__main__":
+    option = sys.argv[1] if len(sys.argv) > 1 else None
+    if option == "-a":
+        RunAvgTestResult(sys.argv[2:8])
+    elif option == "-c":
+        RunCmpTestResult(sys.argv[2:5])
+    else:
+        print("""Usage:
+  {SCRIPT} -a INPUT1 INPUT2 INPUT3 INPUT4 INPUT5 OUTPUT
+  {SCRIPT} -c INPUT1 INPUT2 OUTPUT
+""".format(SCRIPT=sys.argv[0]))
