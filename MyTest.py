@@ -192,6 +192,11 @@ class TestResultTable(unittest.TestCase):
         with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
             s1 = pickle.load(f)
 
+        # with open("s1.txt", "w") as f:
+        #     f.write(s1)
+        # with open("s.txt", "w") as f:
+        #     f.write(s)
+
         self.assertEqual(s, s1)
 
 
@@ -203,11 +208,16 @@ class TestResultTable(unittest.TestCase):
 
         s = res.ResultLines()
 
-        # with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "wb") as f:
+        # with open("AvgTestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "wb") as f:
         #     pickle.dump(s, f)
 
-        with open("TestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
+        with open("AvgTestResultTable_data_shaderbench_Ariel_llpc_1_001_test_results.txt", "rb") as f:
             s1 = pickle.load(f)
+
+        # with open("s1.txt", "w") as f:
+        #     f.write(s1)
+        # with open("s.txt", "w") as f:
+        #     f.write(s)
 
         self.assertEqual(s, s1)
 
