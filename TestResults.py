@@ -170,7 +170,7 @@ class TestResult(object):
         return True
 
     def ResultLines(self):
-        return '\n\n'.join([tab.TableLines() for tab in self.tabs])
+        return ''.join(['\n'+tab.TableLines()+'\n' for tab in self.tabs])
 
 
 def AvgVal(vals):
